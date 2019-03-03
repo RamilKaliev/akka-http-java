@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthorEntity {
 
-    private long id;
-    private String firstName;
-    private String lastName;
+    private final long id;
+    private final String firstName;
+    private final String lastName;
 
     @JsonCreator
     public AuthorEntity(@JsonProperty("id") long id,
@@ -17,6 +17,19 @@ public class AuthorEntity {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
 }

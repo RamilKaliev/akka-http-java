@@ -49,12 +49,12 @@ public class RestRouting extends AllDirectives {
                                     CompletionStage<AuthorEntity> stage = restHandlerService.saveAuthor(
                                             new AuthorApiMessage(null, body.getFirstName(), body.getLastName())
                                     );
-                                    return onSuccess(stage, entity -> completeOK(entity, Jackson.marshaller()));
+                                    return onSuccess(stage, entity -> completeOK(entity, Jackson.<AuthorEntity>marshaller()));
 
                                 })),
                                 get(() -> {
                                     CompletionStage<List<AuthorEntity>> authors = restHandlerService.getAuthors();
-                                    return completeOKWithFuture(authors, Jackson.marshaller());
+                                    return completeOKWithFuture(authors, Jackson.<List<AuthorEntity>>marshaller());
                                 })
                             )
                         ),
@@ -63,11 +63,11 @@ public class RestRouting extends AllDirectives {
                                     CompletionStage<BookEntity> stage = restHandlerService.saveBook(
                                             new BookApiMessage(null, body.getName(), body.getDescr(), body.getAuthorId())
                                     );
-                                    return onSuccess(stage, entity -> completeOK(entity, Jackson.marshaller()));
+                                    return onSuccess(stage, entity -> completeOK(entity, Jackson.<BookEntity>marshaller()));
                                 })),
                                 get(() -> {
                                     CompletionStage<List<BookEntity>> books = restHandlerService.getBooks();
-                                    return completeOKWithFuture(books, Jackson.marshaller());
+                                    return completeOKWithFuture(books, Jackson.<List<BookEntity>>marshaller());
                                 })
                         ))
                 )
