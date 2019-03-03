@@ -1,8 +1,10 @@
 package akka.http.java.service;
 
 import akka.http.java.model.entity.AuthorEntity;
+import akka.http.java.model.entity.BookEntity;
 import akka.http.java.model.message.AuthorApiMessage;
-import akka.http.java.repository.H2Repository;
+import akka.http.java.model.message.BookApiMessage;
+import akka.http.java.repository.InMemoryRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,25 +13,46 @@ import java.util.concurrent.CompletionStage;
 
 public class RestHandlerService {
 
-    final private H2Repository h2Repository;
+    final private InMemoryRepository repository;
 
 
-    public RestHandlerService(H2Repository h2Repository) {
-        this.h2Repository = h2Repository;
+    public RestHandlerService(InMemoryRepository repository) {
+        this.repository = repository;
     }
 
-
-    // SAVE AUTHOR future
-    public CompletionStage<Optional<AuthorEntity>> saveAuthor(AuthorApiMessage message) {
+    /*
+    AUTHOR
+     */
+    // SAVE
+    public CompletionStage<AuthorEntity> saveAuthor(AuthorApiMessage message) {
         return CompletableFuture.completedFuture(
-                Optional.of(h2Repository.saveAuthor(message.firstName, message.lastName))
+                repository.addAuthor(message.firstName, message.lastName)
+        );
+    }
+
+    // READ
+    public CompletionStage<List<AuthorEntity>> getAuthors() {
+        return CompletableFuture.completedFuture(
+                repository.getAuthors()
         );
     }
 
 
-    public CompletionStage<List<AuthorEntity>> getAuthors() {
+    /*
+    BOOK
+     */
+    // SAVE
+    public CompletionStage<BookEntity> saveBook(BookApiMessage message) {
         return CompletableFuture.completedFuture(
-                null
+                repository.addBook(message.name, message.descr, message.authorId)
+        );
+    }
+
+
+    // READ
+    public CompletionStage<List<BookEntity>> getBooks() {
+        return CompletableFuture.completedFuture(
+                repository.getBooks()
         );
     }
 

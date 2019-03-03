@@ -10,7 +10,7 @@ public class BookEntity {
     private long authorId;
 
 
-    BookEntity(String id, String name, String descr, long authorId) {
+    public BookEntity(String id, String name, String descr, long authorId) {
         this.id = id;
         this.name = name;
         this.descr = descr;

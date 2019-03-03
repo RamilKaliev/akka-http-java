@@ -9,12 +9,12 @@ public class BookApiBody {
 
     private final String name;
     private final String descr;
-    private final String authorId;
+    private final long authorId;
 
     @JsonCreator
     BookApiBody(@JsonProperty("name") String name,
                 @JsonProperty("descr") String descr,
-                @JsonProperty("authorId") String authorId) {
+                @JsonProperty("authorId") long authorId) {
         this.name = name;
         this.descr = descr;
         this.authorId = authorId;
@@ -29,7 +29,7 @@ public class BookApiBody {
         return descr;
     }
 
-    public String getAuthorId() {
+    public long getAuthorId() {
         return authorId;
     }
 }

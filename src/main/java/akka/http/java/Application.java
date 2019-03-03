@@ -2,7 +2,8 @@ package akka.http.java;
 
 import akka.NotUsed;
 import akka.actor.ActorSystem;
-import akka.http.java.repository.H2Repository;
+import akka.http.java.cache.InMemoryCache;
+import akka.http.java.repository.InMemoryRepository;
 import akka.http.java.route.RestRouting;
 import akka.http.java.service.RestHandlerService;
 import akka.http.javadsl.ConnectHttp;
@@ -37,14 +38,11 @@ public class Application {
         // akka http
         Http http = Http.get(system);
 
+        // cache
+        InMemoryCache cache = new InMemoryCache();
 
         // h2 database repository
-        H2Repository repository = new H2Repository("jdbc:h2:bookstore");
-        if (repository.check()) {
-            repository.init();
-        } else {
-            System.exit(0);
-        }
+        InMemoryRepository repository = new InMemoryRepository(cache);
 
         // http rest handler
         RestHandlerService restHandler = new RestHandlerService(repository);
