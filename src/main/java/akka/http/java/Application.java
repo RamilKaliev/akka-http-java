@@ -53,7 +53,8 @@ public class Application {
         final Flow<HttpRequest, HttpResponse, NotUsed> flow = restRouting.createRoutes().flow(system, materializer);
 
         http.bindAndHandle(flow, ConnectHttp.toHost(config.getString("server.host"), config.getInt("server.port")), materializer);
-        System.out.println("Server online at http://localhost:8080/...");
+        System.out.println("Server online at http://localhost:8080/v1/bookstore...");
+
     }
 
 

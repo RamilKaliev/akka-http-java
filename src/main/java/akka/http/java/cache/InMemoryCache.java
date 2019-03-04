@@ -19,7 +19,7 @@ public class InMemoryCache {
         // insert initial authors
         long authorId = (long)Math.random() * 100;
         AUTHORS.put(UUID.randomUUID().toString(), new AuthorEntity(authorId + 1, "Charles", "Dickens"));
-        AUTHORS.put(UUID.randomUUID().toString(), new AuthorEntity(authorId + 2, "Arthur", "Konan-Doyle"));
+        AUTHORS.put(UUID.randomUUID().toString(), new AuthorEntity(authorId + 2, "Arthur", "Conan-Doyle"));
         AUTHORS.put(UUID.randomUUID().toString(), new AuthorEntity(authorId + 3, "Alex", "Pushkin"));
         AUTHORS.put(UUID.randomUUID().toString(), new AuthorEntity(authorId + 4, "Michail", "Lermontov"));
         AUTHORS.put(UUID.randomUUID().toString(), new AuthorEntity(authorId + 5, "Joseph", "Cronin"));
